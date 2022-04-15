@@ -18,5 +18,7 @@ class Batch():
     
     def enroll(self, Member): #enrolls member to the Batch, adds member object to the students list
         self.students.append(Member)
-
+        self.currentsize ++
     
+    def isFull()
+        return self.currentsize == self.sizeCap
