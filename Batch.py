@@ -19,17 +19,4 @@ class Batch():
     def enroll(self, Member): #enrolls member to the Batch, adds member object to the students list
         self.students.append(Member)
 
-    #def sort_batch_attendence(self): #sorts batch by the the number of attendence
-        #dicts = {}
-        
-        #for i in range(len(self.students)):
-            #dicts[self.students[i].name] = self.students[i].attended
-
-        #sorted(dicts.items(), key=lambda x: x[1], reverse=True)
-
-        #self.memberA = list(dicts.keys())  
-
-        #return self.memberA      
-
-    #def sort_batch_paid(self): #sorts batch by the amount of times they paid or not
-        #pass
+    
