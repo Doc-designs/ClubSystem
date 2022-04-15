@@ -23,7 +23,7 @@ class Coach(User):
         student.messagesReceived.append(message)
   def getFunction(self):
     return self.functions
-  def useFunction(self, userInput):
+  def useFunction(self, userInput, Users, Batches):
     #Balance
     if(userInput.lower() == functions[0].lower()):
       print(self.balance)
