@@ -7,7 +7,7 @@ class Member(User):
         #Inherit
         super().__init__(name, password, contactInfo, authority)
         #Useable Functions
-        self.functions = ["Balance", "Schedule", "Pay"]
+        self.functions = ["Balance", "Schedule"]
         self.balance = 0
         self.attended = 0
         self.totalClasses = 0
@@ -37,3 +37,13 @@ class Member(User):
         batch.enroll(self)
     def getFunction(self):
         return self.functions
+    def useFunction(self, userInput, Users, Batches):
+            #Balance
+            if(userInput.lower() == self.functions[0].lower()):
+                print(self.balance)
+            #Schedule
+            elif(userInput.lower() == self.functions[1].lower()):
+                self.Schedule()
+            #Invalid Input
+            else:
+                print("Invalid user input") 
