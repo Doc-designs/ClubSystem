@@ -157,7 +157,7 @@ class Treasurer(User):
     def getFunction(self):
         return self.functions
 
-    def useFunction(self, userInput):
+    def useFunction(self, userInput, Users, Batches):
         #Balance
         if(userInput.lower() == self.functions[1].lower()):
             print(self.balance)
