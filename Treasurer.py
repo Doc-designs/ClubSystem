@@ -34,7 +34,7 @@ class Treasurer(User):
         self.debt = 0.0
 
         #Useable Functions
-        self.functions = ["Signout", "Balance", "Hire", "Pay", "Members"]
+        self.functions = ["Balance", "Hire", "Pay", "Members"]
 
     #Adds a member to the list of advance payment
     def addPaylist(self, payee, amount):
@@ -159,16 +159,16 @@ class Treasurer(User):
 
     def useFunction(self, userInput, Users, Batches):
         #Balance
-        if(userInput.lower() == self.functions[1].lower()):
+        if(userInput.lower() == self.functions[0].lower()):
             print(self.balance)
         #Hire
-        elif(userInput.lower() == self.functions[2].lower()):
+        elif(userInput.lower() == self.functions[1].lower()):
             self.Hire()
         #Pay
-        elif(userInput.lower() == self.functions[3].lower()):
+        elif(userInput.lower() == self.functions[2].lower()):
             self.Pay()
         #List Members
-        elif(userInput.lower() == self.functions[4].lower()):
+        elif(userInput.lower() == self.functions[3].lower()):
             self.Members()
         #Invalid
         else:

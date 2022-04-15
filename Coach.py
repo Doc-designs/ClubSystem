@@ -6,7 +6,7 @@ class Coach(User):
     #Inherit
     super().__init__(name, password, contactInfo, authority)
     #Useable Functions
-    self.functions = ["Balance", "Create Announcement", "Message Student","Pay", "Members"]
+    self.functions = ["Balance", "Create Announcement", "Message Student", "Pay", "Members"]
     self.batchList = []
     self.selectedBatch
   #Find Batch
