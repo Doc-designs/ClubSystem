@@ -32,9 +32,22 @@ class Member(User):
         #Return Amount being paid to its destination
         return Amount
     def Schedule(self, batch):
-        #add batch to batch member's batch list and enroll student in batch function
-        self.batchesList.append(batch)
-        batch.enroll(self)
+        for batch in batches:
+            if not batch.isFull():
+                print(batch.date)
+        hold = ""
+        x = True
+        while x:
+            userInput = input("Please type in the date of the batch that is available: ")
+            for batch in batches:
+                if userInput == batch.date:
+                    #add batch to batch member's batch list and enroll student in batch function
+                    self.batchesList.append(batch)
+                    self.totalClasses ++
+                    batch.enroll(self)
+                    x = False
+                    break
+            print("No batch is found with such date")
     def getFunction(self):
         return self.functions
     def useFunction(self, userInput, Users, Batches):
