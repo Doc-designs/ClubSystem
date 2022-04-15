@@ -43,7 +43,7 @@ def main():
                     break
                 else:
                     #Input Users Function
-                    Users[i].useFunction(userInput)
+                    Users[i].useFunction(userInput, Users, Batches)
                     
 #Below function is used to set a variable to a treasurer object
 def findTreasurer():
