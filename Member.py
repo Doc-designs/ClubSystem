@@ -47,3 +47,13 @@ class Member(User):
             #Invalid Input
             else:
                 print("Invalid user input") 
+                
+class TestPay(TestCase):
+
+    def test_pay(self):
+        result = self.balance
+        self.assertEqual(result, Amount)
+
+if __name__ == '__main__':
+    main()
+            
