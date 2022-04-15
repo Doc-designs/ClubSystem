@@ -23,16 +23,15 @@ class Treasurer(User):
         #Dictionary containing all members who have paid and the amount paid
         #Income and revenue is also logged in these variables
         self.memberPay = {}
-        self.otherIncome = 0
-        self.revenue = 0
+        self.otherIncome = 0.0
+        self.revenue = 0.0
 
         #Total profits for this month, and all previous month profits logged here
-        self.profits = 0
+        self.profits = 0.0
         self.profitList = []
 
         #Total amount of debt
-        self.coachDebt = 0
-        self.hallDebt = 0
+        self.debt = 0.0
 
         #Useable Functions
         self.functions = ["Signout", "Balance", "Hire", "Pay", "Members"]
@@ -71,6 +70,21 @@ class Treasurer(User):
     #Set profits for this month
     def setProfits(self):
         self.profits = self.revenue - self.expenses
+        
+    def debts(self):
+        if self.profits < self.expenses:
+            self.debt += self.expenses - self.profits
+        return self.debt
+    
+    def payDebt(Amount):
+        if self.debt == 0:
+            print("There is no debt to pay")
+        elif amount > self.debt:
+            self.expenses += self.debt
+            self.debt = 0.0
+        else:
+            self.expenses += amount
+            self.debt -= amount
 
     #Below function creates the income statement
     def incomeStatement(self):
@@ -91,6 +105,8 @@ class Treasurer(User):
             print("Month", str(x+1) + ":", self.profitList[x])
             if x == len(self.profitList) - 2:
                 print("Month", str(x+2) + "(Current Month):", self.profitList[x+1])
+                
+        print("Debt:", self.debts())
 
     #Two functions below are used to sort the member list
     #takePay sorts by the most payments
