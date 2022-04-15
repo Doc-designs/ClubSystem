@@ -44,5 +44,21 @@ def main():
                 else:
                     #Input Users Function
                     Users[i].useFunction(userInput)
+                    
+#Below function is used to set a variable to a treasurer object
+def findTreasurer():
+    for x in Users:
+        if x.getAuthority() == "Treasurer":
+            return x
+
+#Below function checks to see if payee has a discount and applies, it
+#Function then takes discounted amount and takes it from the payee, and gives it the treasurer revenue
+def payToTreasurer(Payee, Amount):
+    treasurer = findTreasurer()
+    discountedAmount = Amount * (1-treasurer.applyDiscount(Payee))
+    Payee.pay(discountedAmount)
+    treasurer.addRevenue(Payee, discountedAmount)
+    
+  
 if __name__ == "__main__":
     main()
