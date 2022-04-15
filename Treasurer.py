@@ -12,13 +12,13 @@ class Treasurer(User):
         self.payList = []
 
         #Total Club balance
-        self.clubBalance = 0
+        self.clubBalance = 0.0
 
         #Various expenses are logged here
-        self.hallCost = 0
-        self.coachCost = 0
-        self.otherCost = 0
-        self.expenses = 0
+        self.hallCost = 0.0
+        self.coachCost = 0.0
+        self.otherCost = 0.0
+        self.expenses = 0.0
 
         #Dictionary containing all members who have paid and the amount paid
         #Income and revenue is also logged in these variables
