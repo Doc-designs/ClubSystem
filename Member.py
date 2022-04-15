@@ -1,4 +1,5 @@
 from User import *
+from Batch import *
 
 class Member(User):
     #Class Init
@@ -6,7 +7,7 @@ class Member(User):
         #Inherit
         super().__init__(name, password, contactInfo, authority)
         #Useable Functions
-        self.functions = ["Balance", "Schedule"]
+        self.functions = ["Balance", "Schedule", "Pay"]
         self.balance = 0
         self.attended = 0
         self.totalClasses = 0
@@ -30,17 +31,9 @@ class Member(User):
         self.balance -= Amount
         #Return Amount being paid to its destination
         return Amount
-    def Schedule(self, batches):
-        userInput = input("What would you like to do?: ")
+    def Schedule(self, batch):
+        #add batch to batch member's batch list and enroll student in batch function
+        self.batchesList.append(batch)
+        batch.enroll(self)
     def getFunction(self):
         return self.functions
-    def useFunction(self, userInput):
-            #Balance
-            if(userInput.lower() == self.functions[0].lower()):
-                print(self.balance)
-            #Schedule
-            elif(userInput.lower() == self.functions[1].lower()):
-                self.Schedule()
-            #Invalid Input
-            else:
-                print("Invalid user input")
