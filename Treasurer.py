@@ -134,7 +134,7 @@ class Treasurer(User):
                 memTup = x
 
         sortList = self.SortMembers(self.memberList, "Paid")
-        payFilter = filter(lambda x: x[1] == 3, sortList)
+        payFilter = filter(lambda x: x[1] == 12, sortList)
         payList = list(payFilter)
         for x in payList:
             if member == x[0]:
