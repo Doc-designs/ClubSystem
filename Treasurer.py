@@ -76,7 +76,7 @@ class Treasurer(User):
             self.debt += self.expenses - self.profits
         return self.debt
     
-    def payDebt(Amount):
+    def payDebt(amount):
         if self.debt == 0:
             print("There is no debt to pay")
         elif amount > self.debt:
@@ -141,7 +141,7 @@ class Treasurer(User):
                 discount += 0.10
                 self.memberList.remove(x)
                 memTup = (member, 0, memTup[2])
-                self.MemberList.append(memTup)
+                self.memberList.append(memTup)
 
         sortList = self.SortMembers(self.memberList, "Attendance")
         sortList = sortList[:10]
