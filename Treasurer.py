@@ -164,6 +164,7 @@ class Treasurer(User):
                 print("Month", str(x+2) + "(Current Month):", self.profitList[x+1])
                 
         print("Debt:", self.debts())
+        self.clubPayment()
         self.resetIncome()
         print()
     #Two functions below are used to sort the member list
