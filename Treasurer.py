@@ -56,9 +56,13 @@ class Treasurer(User):
     # Increases the attendances and payments
     def addTimesPaidAttendance(self, memberInfo):
         for x in self.memberList:
-            if x[0] == memberInfo:
-                self.memberList.append((memberInfo, x[1] + 1, x[2] +1))
-                self.memberList.remove(x)
+            if str(x[0]) == str(memberInfo):
+                y = x
+                break
+        paid = y[1]+1
+        attended = y[2]+1
+        self.memberList.remove(y)
+        self.memberList.append((memberInfo, paid-1, attended))
 
     # Sets time paid to 0 if payment is missed
     def removeTimesPaid(self, memberInfo):
@@ -182,16 +186,17 @@ class Treasurer(User):
     #This function applys a discount, then resets that users pay value and attendance value
     def applyDiscount(self, member):
         discount = 0.0
+        self.addTimesPaidAttendance(member)
         memTup = None
         for x in self.memberList:
-            if member == x[0]:
+            if str(member) == str(x[0]):
                 memTup = x
 
         sortList = self.SortMembers(self.memberList, "Paid")
         payFilter = filter(lambda x: x[1] == 12, sortList)
         payList = list(payFilter)
         for x in payList:
-            if member == x[0]:
+            if str(member) == str(x[0]):
                 discount += 0.10
                 self.memberList.remove(x)
                 memTup = (member, 0, memTup[2])
@@ -200,7 +205,7 @@ class Treasurer(User):
         sortList = self.SortMembers(self.memberList, "Attendance")
         sortList = sortList[:10]
         for x in sortList:
-            if member == x[0]:
+            if str(member) == str(x[0]):
                 discount += 0.10
                 self.memberList.remove(x)
                 memTup = (member, memTup[1], 0)
@@ -237,7 +242,7 @@ class Treasurer(User):
         elif (userInput.lower() == self.functions[6].lower()):
             print(self.SortMembers("Paid"))
         elif (userInput.lower() == self.functions[7].lower()):
-            print(self.warnNonPayers("Attendance"))
+            print(self.SortMembers("Attendance"))
         #Invalid
         else:
             print("Invalid user input")
