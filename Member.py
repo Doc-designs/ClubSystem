@@ -43,7 +43,7 @@ class Member(User):
                 if userInput == batch.date:
                     #add batch to batch member's batch list and enroll student in batch function
                     self.batchesList.append(batch)
-                    self.totalClasses ++
+                    self.totalClasses += 1
                     batch.enroll(self)
                     x = False
                     break
