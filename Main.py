@@ -30,8 +30,8 @@ def main():
             name = Users[i].name
             authority = Users[i].authority
             print("Welcome " + name)
+            Batches = Users[i].batchesList
             if(authority == "Member"):
-                Batches = Users[i].batchesList
                 for batch in Batches:
                     Users[i].receiveAnnouncements(batch)
             #While Logged In
@@ -39,8 +39,11 @@ def main():
                 print(Users[i].getFunction())
                 userInput = input("What would you like to do?: ")
                 #Signout
-                if(userInput.lower() == functions[0].lower()):
-                    break
+                if userInput == "MemberPay":
+                    info = input("Please enter that user's contact Info: ")
+                    payment = input("How much money do they need to pay?: ")
+                    payToTreasurer(info, int(payment))
+                    print("User paid:", int(payment))
                 else:
                     #Input Users Function
                     Users[i].useFunction(userInput, Users, Batches)
