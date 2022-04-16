@@ -63,7 +63,9 @@ def findTreasurer():
 def payToTreasurer(Payee, Amount):
     treasurer = findTreasurer()
     discountedAmount = Amount * (1-treasurer.applyDiscount(Payee))
-    Payee.pay(discountedAmount)
+    for x in Users:
+        if x.getContactInfo == Payee:
+            x.pay(discountedAmount)
     treasurer.addRevenue(Payee, discountedAmount)
     return discountedAmount
     
