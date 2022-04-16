@@ -43,7 +43,7 @@ def main():
                 print(Users[i].getFunction())
                 userInput = input("What would you like to do?: ")
                 #Signout
-                if userInput == "MemberPay":
+                if userInput == "Pay" and authority == "Member":
                     info = input("Please enter that user's contact Info: ")
                     payment = input("How much money do they need to pay?: ")
                     paid = payToTreasurer(info, int(payment))

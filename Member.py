@@ -7,7 +7,7 @@ class Member(User):
         #Inherit
         super().__init__(name, password, contactInfo, authority)
         #Useable Functions
-        self.functions = ["Balance", "Schedule"]
+        self.functions = ["Balance", "Pay", "Schedule"]
         self.balance = 0
         self.attended = 0
         self.totalClasses = 0
@@ -26,11 +26,6 @@ class Member(User):
         for batch in self.batchesList:
             for message in self.messagesReceived:
                 print(batch.instructor + ": " + message)
-    def Pay(self, Amount):
-        #Subtract amount from self
-        self.balance -= Amount
-        #Return Amount being paid to its destination
-        return Amount
     def Schedule(self, batches):
         for batch in batches:
             if not batch.isFull():
@@ -60,13 +55,3 @@ class Member(User):
             #Invalid Input
             else:
                 print("Invalid user input") 
-                
-class TestPay(TestCase):
-
-    def test_pay(self):
-        result = self.balance
-        self.assertEqual(result, Amount)
-
-if __name__ == '__main__':
-    main()
-            
