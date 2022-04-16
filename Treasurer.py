@@ -206,10 +206,10 @@ class Treasurer(User):
     
     # Function returns lists of those who have missed only 1 payment,
     # and a list of those who will be subject to a penalty fee
-    def warnNonPayers(self, sortList):
-        nonPayment = filter(lambda x: x[2] == 0, sortList)
+    def warnNonPayers(self):
+        nonPayment = filter(lambda x: x[2] == 0, self.memberList)
         nonPayerList = list(nonPayment)
-        penaltyFees = filter(lambda x: x[2] < 0, sortList)
+        penaltyFees = filter(lambda x: x[2] < 0, self.memberList)
         penaltyList = list(penaltyFees)
         return [nonPayerList, penaltyList]
 
