@@ -7,6 +7,10 @@ Batches = [] # For storing the Batch instances
 def main():
     #Test User
     Users.append(Treasurer("Tom", "abc123", "6102534533", "Treasurer"))
+    Users.append(Member("John", "abc123", "63344", "Member"))
+    Users.append(Member("Bob", "abc123", "63424", "Member"))
+    Users[0].addMember(63344)
+    Users[0].addMember(63424)
     #Welcome Message
     print("Welcome to the Club Digital System")
     print("If you are a returning Users, enter your Username and password,\nOtherwise Type 'Create'")
