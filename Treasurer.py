@@ -115,7 +115,9 @@ class Treasurer(User):
         else:
             self.expenses += amount
             self.debt -= amount
-
+    
+    def getDebt(self):
+        print("Current Debt is:", self.debt)
     # Profits get added to club balance here
     # If the profits are negative, then instead the money is taken from the balance
     # If there is not enough balance remaining, then debt is taken
@@ -158,7 +160,8 @@ class Treasurer(User):
                 print("Month", str(x+2) + "(Current Month):", self.profitList[x+1])
                 
         print("Debt:", self.debts())
-
+        self.resetIncome()
+        print()
     #Two functions below are used to sort the member list
     #takePay sorts by the most payments
     def takePay(elem):
@@ -219,16 +222,23 @@ class Treasurer(User):
     def useFunction(self, userInput, Users, Batches):
         #Balance
         if(userInput.lower() == self.functions[0].lower()):
-            print(self.balance)
+            print("Club Balance is:", self.clubBalance)
         #Hire
         elif(userInput.lower() == self.functions[1].lower()):
-            self.Hire()
-        #Pay
-        elif(userInput.lower() == self.functions[2].lower()):
-            self.Pay()
-        #List Members
+            self.incomeStatement()
         elif(userInput.lower() == self.functions[3].lower()):
-            self.Members()
+            print("All members: ")
+            for x in self.memberList:
+                print(str(x[0]), "has paid:", str(x[1]), "times and attended", str(x[2]), "classes.")
+        elif (userInput.lower() == self.functions[4].lower()):
+            self.getDebt()
+        elif (userInput.lower() == self.functions[5].lower()):
+            self.warnNonPayers()
+        elif (userInput.lower() == self.functions[6].lower()):
+            print(self.SortMembers("Paid"))
+        elif (userInput.lower() == self.functions[7].lower()):
+            print(self.warnNonPayers("Attendance"))
         #Invalid
         else:
             print("Invalid user input")
+
