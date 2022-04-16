@@ -1,3 +1,4 @@
+import unittest
 from User import *
 from Treasurer import *
 from Coach import *
@@ -68,7 +69,26 @@ def payToTreasurer(Payee, Amount):
             x.pay(discountedAmount)
     treasurer.addRevenue(Payee, discountedAmount)
     return discountedAmount
-    
-  
+
+class Test(unittest.TestCase):
+def test_modifyLog(self):
+    Users.append(Treasurer("Tom", "abc123", "6102534533", "Treasurer"))
+    Users.append(Member("John", "abc123", "63344", "Member"))
+    Users.append(Member("Bob", "abc123", "63424", "Member"))
+    Users[0].addMember(63344)
+    Users[0].addMember(63424)
+    amount = payToTreasurer(63344, 32)
+    self.assertEqual(amount, 25.6)
+    def test_balanceChange(self):
+    Users.append(Treasurer("Tom", "abc123", "6102534533", "Treasurer"))
+    Users.append(Member("John", "abc123", "63344", "Member"))
+    Users.append(Member("Bob", "abc123", "63424", "Member"))
+    Users[0].addMember(63344)
+    Users[0].addMember(63424)
+    treasurer = findTreasurer()
+    treasurer.clubBalance += payToTreasurer(63344, 32)
+    balance = treasurer.clubBalance
+    self.assertEqual(balance, 1028.8)
+
 if __name__ == "__main__":
     main()
