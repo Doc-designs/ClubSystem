@@ -35,7 +35,6 @@ class Member(User):
         for batch in batches:
             if not batch.isFull():
                 print(batch.date)
-        hold = ""
         x = True
         while x:
             userInput = input("Please type in the date of the batch that is available: ")
@@ -48,6 +47,7 @@ class Member(User):
                     x = False
                     break
             print("No batch is found with such date")
+        print("Scheduling successful")      
     def getFunction(self):
         return self.functions
     def useFunction(self, userInput, Users, Batches):
