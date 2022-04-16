@@ -20,5 +20,5 @@ class Batch():
         self.students.append(Member)
         self.currentsize ++
     
-    def isFull()
+    def isFull():
         return self.currentsize == self.sizeCap
