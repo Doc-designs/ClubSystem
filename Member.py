@@ -31,7 +31,7 @@ class Member(User):
         self.balance -= Amount
         #Return Amount being paid to its destination
         return Amount
-    def Schedule(self, batch):
+    def Schedule(self, batches):
         for batch in batches:
             if not batch.isFull():
                 print(batch.date)
