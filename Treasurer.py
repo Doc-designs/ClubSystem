@@ -6,37 +6,71 @@ class Treasurer(User):
         #Inherit
         super().__init__(name, password, contactInfo, authority)
 
+        # Following Lists track members and coaches
         self.memberList = []
+        self.coachList = []
 
-        #Log of those who have paid in advance
+        # Log of those who have paid in advance
         self.payList = []
 
-        #Total Club balance
-        self.clubBalance = 0.0
+        # Total Club balance
+        self.clubBalance = 1000.0
 
-        #Various expenses are logged here
+        # Various expenses are logged here
         self.hallCost = 0.0
         self.coachCost = 0.0
         self.otherCost = 0.0
         self.expenses = 0.0
 
-        #Dictionary containing all members who have paid and the amount paid
-        #Income and revenue is also logged in these variables
+        # Dictionary containing all members who have paid and the amount paid
+        # Income and revenue is also logged in these variables
         self.memberPay = {}
         self.otherIncome = 0.0
         self.revenue = 0.0
 
-        #Total profits for this month, and all previous month profits logged here
+        # Total profits for this month, and all previous month profits logged here
         self.profits = 0.0
         self.profitList = []
 
-        #Total amount of debt
+        # Total amount of debt
         self.debt = 0.0
 
-        #Useable Functions
+        # Useable Functions
         self.functions = ["Balance", "Hire", "Pay", "Members"]
 
-    #Adds a member to the list of advance payment
+        # Below functions manage coach and member lists
+    def addCoach(self, coachInfo):
+        self.coachList.append(coachInfo)
+
+    def removeCoach(self, coachInfo):
+        self.coachList.remove(coachInfo)
+
+    def addMember(self, memberInfo):
+        self.memberList.append(memberInfo, 0, 0)
+
+    def removeMember(self, memberInfo):
+        for x in self.memberList:
+            if x[0] == memberInfo:
+                self.memberList.remove(x)
+
+    # Increases the attendances and payments
+    def addTimesPaidAttendance(self, memberInfo):
+        for x in self.memberList:
+            if x[0] == memberInfo:
+                self.memberList.append((memberInfo, x[1] + 1, x[2] +1))
+                self.memberList.remove(x)
+
+    # Sets time paid to 0 if payment is missed
+    def removeTimesPaid(self, memberInfo):
+        for x in self.memberList:
+            if x[0] == memberInfo:
+                if x[1] == 0:
+                    self.memberList.append((memberInfo, x[1] - 1, x[2]))
+                else:
+                    self.memberList.append((memberInfo, x[1] + 1, x[2]))
+                self.memberList.remove(x)
+    
+    # Adds a member to the list of advance payment
     def addPaylist(self, payee, amount):
         self.payList.append(payee)
         self.memberPay[payee] = amount
@@ -70,12 +104,8 @@ class Treasurer(User):
     #Set profits for this month
     def setProfits(self):
         self.profits = self.revenue - self.expenses
-        
-    def debts(self):
-        if self.profits < self.expenses:
-            self.debt += self.expenses - self.profits
-        return self.debt
     
+    # Pays off debts by increasing expenses
     def payDebt(amount):
         if self.debt == 0:
             print("There is no debt to pay")
@@ -86,6 +116,27 @@ class Treasurer(User):
             self.expenses += amount
             self.debt -= amount
 
+    # Profits get added to club balance here
+    # If the profits are negative, then instead the money is taken from the balance
+    # If there is not enough balance remaining, then debt is taken
+    def clubPayment(self):
+        payment = self.profits
+        if self.profits >= 0:
+            self.clubBalance += self.profits
+        elif self.profits < 0 and self.clubBalance - self.profits < 0:
+            self.profits += self.clubBalance
+            self.clubBalance = 0
+            self.debt -= self.profits
+        else:
+            self.clubBalance += self.profits
+        self.resetIncome()
+    
+    # Resets income after paying for club
+    def resetIncome(self):
+        self.revenue = 0.0
+        self.profits = 0.0
+        self.otherIncome = 0.0
+    
     #Below function creates the income statement
     def incomeStatement(self):
         print("Revenue:")
@@ -152,7 +203,15 @@ class Treasurer(User):
                 memTup = (member, memTup[1], 0)
                 self.memberList.append(memTup)
         return discount
-
+    
+    # Function returns lists of those who have missed only 1 payment,
+    # and a list of those who will be subject to a penalty fee
+    def warnNonPayers(self, sortList):
+        nonPayment = filter(lambda x: x[2] == 0, sortList)
+        nonPayerList = list(nonPayment)
+        penaltyFees = filter(lambda x: x[2] < 0, sortList)
+        penaltyList = list(penaltyFees)
+        return [nonPayerList, penaltyList]
 
     def getFunction(self):
         return self.functions
