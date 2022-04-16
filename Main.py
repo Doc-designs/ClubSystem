@@ -46,8 +46,8 @@ def main():
                 if userInput == "MemberPay":
                     info = input("Please enter that user's contact Info: ")
                     payment = input("How much money do they need to pay?: ")
-                    payToTreasurer(info, int(payment))
-                    print("User paid:", int(payment))
+                    paid = payToTreasurer(info, int(payment))
+                    print("User paid:", int(paid))
                 else:
                     #Input Users Function
                     Users[i].useFunction(userInput, Users, Batches)
@@ -65,6 +65,7 @@ def payToTreasurer(Payee, Amount):
     discountedAmount = Amount * (1-treasurer.applyDiscount(Payee))
     Payee.pay(discountedAmount)
     treasurer.addRevenue(Payee, discountedAmount)
+    return discountedAmount
     
   
 if __name__ == "__main__":
